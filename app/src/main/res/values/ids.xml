@@ -2,6 +2,6 @@
 <resources>
     <item name="editTextUsername" type="id" />
     <item name="editTextPassword" type="id" />
-    <item name="button" type="id" />
+    <item name="LoginButton" type="id" />
     <item name="RegisterButton" type="id" />
 </resources>
