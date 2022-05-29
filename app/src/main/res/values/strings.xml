@@ -4,4 +4,7 @@
     <string name="registerButton">Register</string>
     <string name="loginUsername">Username</string>
     <string name="loginPassword">Password</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="backButton">Back</string>
+    <string name="nickname">Nickname</string>
 </resources>

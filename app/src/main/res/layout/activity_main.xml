@@ -22,7 +22,8 @@
             android:ems="10"
             android:layout_marginBottom="10dp"
             android:hint="@string/loginUsername"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:minHeight="48dp"/>
 
         <EditText
             android:id="@+id/editTextPassword"
