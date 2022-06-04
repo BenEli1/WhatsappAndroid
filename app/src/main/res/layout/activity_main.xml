@@ -23,7 +23,8 @@
             android:layout_marginBottom="10dp"
             android:hint="@string/loginUsername"
             android:inputType="textPersonName"
-            android:minHeight="48dp"/>
+            android:minHeight="48dp"
+            android:importantForAutofill="no"/>
 
         <EditText
             android:id="@+id/editTextPassword"
@@ -33,21 +34,27 @@
             android:ems="10"
             android:hint="@string/loginPassword"
             android:inputType="textPassword"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            android:importantForAutofill="no"/>
 
         <Button
             android:id="@+id/LoginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/loginButton" />
+            android:text="@string/loginButton"
+            android:textAllCaps="false"
+            android:backgroundTint="#CCCCCC"/>
 
         <Button
             android:id="@+id/RegisterButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/registerButton" />
+            android:text="@string/registerButton"
+            android:textAllCaps="false"
+            android:backgroundTint="#CCCCCC"
+            />
 
 
     </LinearLayout>

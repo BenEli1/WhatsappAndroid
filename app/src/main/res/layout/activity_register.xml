@@ -23,7 +23,8 @@
             android:layout_marginBottom="10dp"
             android:hint="@string/loginUsername"
             android:minHeight="48dp"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:importantForAutofill="no"/>
         <EditText
             android:id="@+id/editTextNickname"
             android:layout_width="match_parent"
@@ -32,7 +33,8 @@
             android:layout_marginBottom="10dp"
             android:hint="@string/nickname"
             android:minHeight="48dp"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:importantForAutofill="no"/>
 
         <EditText
             android:id="@+id/editTextPassword"
@@ -42,7 +44,8 @@
             android:ems="10"
             android:hint="@string/loginPassword"
             android:inputType="textPassword"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            android:importantForAutofill="no"/>
         <EditText
             android:id="@+id/editTextPasswordCheck"
             android:layout_width="match_parent"
@@ -51,20 +54,26 @@
             android:ems="10"
             android:hint="@string/confirmPassword"
             android:inputType="textPassword"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            android:importantForAutofill="no"/>
 
         <Button
             android:id="@+id/RegisterButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/registerButton" />
+            android:text="@string/registerButton"
+            android:textAllCaps="false"
+            android:backgroundTint="#CCCCCC"/>
         <Button
             android:id="@+id/BackButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/backButton" />
+            android:text="@string/backButton"
+            android:textAllCaps="false"
+
+            android:backgroundTint="#CCCCCC"/>
 
 
 
