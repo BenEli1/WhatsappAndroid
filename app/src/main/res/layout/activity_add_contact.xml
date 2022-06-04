@@ -4,6 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddContactActivity">
+    tools:context=".AddContactActivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="50dp">
+
+        <EditText
+            android:id="@+id/editTextUsername2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_marginBottom="10dp"
+            android:hint="@string/loginUsername"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:importantForAutofill="no"/>
+
+        <EditText
+            android:id="@+id/editTextNickName2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:hint="@string/nickname"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:importantForAutofill="no"/>
+        <EditText
+            android:id="@+id/editTextServer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:hint="@string/server"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:importantForAutofill="no"/>
+
+        <Button
+            android:id="@+id/LoginButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/add_contact"
+            android:textAllCaps="false"
+            android:backgroundTint="#CCCCCC"/>
+        <Button
+            android:id="@+id/BackButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/backButton"
+            android:textAllCaps="false"
+
+            android:backgroundTint="#CCCCCC"/>
+
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

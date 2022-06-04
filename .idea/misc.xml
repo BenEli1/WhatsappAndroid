@@ -3,18 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Ben/AndroidStudioProjects/WhatsappAndroid/app/src/main/res/drawable-anydpi/ic_action_name.xml" value="0.2095" />
         <entry key="..\:/Users/Ben/AndroidStudioProjects/WhatsappAndroid/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.196" />
+        <entry key="..\:/Users/Ben/AndroidStudioProjects/WhatsappAndroid/app/src/main/res/drawable/add_icon.xml" value="0.2095" />
         <entry key="..\:/Users/Ben/AndroidStudioProjects/WhatsappAndroid/app/src/main/res/drawable/custom_button.xml" value="0.353" />
         <entry key="..\:/Users/Ben/AndroidStudioProjects/WhatsappAndroid/app/src/main/res/drawable/ic_launcher_background.xml" value="0.196" />
         <entry key="..\:/Users/Ben/AndroidStudioProjects/WhatsappAndroid/app/src/main/res/layout/activity_add_contact.xml" value="0.3009833262077811" />
-        <entry key="..\:/Users/Ben/AndroidStudioProjects/WhatsappAndroid/app/src/main/res/layout/activity_chat_list.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Ben/AndroidStudioProjects/WhatsappAndroid/app/src/main/res/layout/activity_chat_list.xml" value="0.16908431550317315" />
         <entry key="..\:/Users/Ben/AndroidStudioProjects/WhatsappAndroid/app/src/main/res/layout/activity_list.xml" value="0.3009833262077811" />
         <entry key="..\:/Users/Ben/AndroidStudioProjects/WhatsappAndroid/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Ben/AndroidStudioProjects/WhatsappAndroid/app/src/main/res/layout/activity_register.xml" value="0.1" />
         <entry key="..\:/Users/Ben/AndroidStudioProjects/WhatsappAndroid/app/src/main/res/layout/activity_settings.xml" value="0.2703125" />
         <entry key="..\:/Users/Ben/AndroidStudioProjects/WhatsappAndroid/app/src/main/res/layout/activity_single_chat.xml" value="0.284375" />
         <entry key="..\:/Users/Ben/AndroidStudioProjects/WhatsappAndroid/app/src/main/res/layout/colors.xml" value="0.3009833262077811" />
-        <entry key="..\:/Users/Ben/AndroidStudioProjects/WhatsappAndroid/app/src/main/res/layout/custom_list_item.xml" value="0.3009833262077811" />
+        <entry key="..\:/Users/Ben/AndroidStudioProjects/WhatsappAndroid/app/src/main/res/layout/custom_list_item.xml" value="0.18" />
         <entry key="..\:/Users/Ben/AndroidStudioProjects/WhatsappAndroid/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.196" />
       </map>
     </option>

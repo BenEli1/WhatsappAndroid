@@ -7,4 +7,6 @@
     <string name="confirmPassword">Confirm Password</string>
     <string name="backButton">Back</string>
     <string name="nickname">Nickname</string>
+    <string name="add_contact">Add Contact</string>
+    <string name="server">Server</string>
 </resources>
