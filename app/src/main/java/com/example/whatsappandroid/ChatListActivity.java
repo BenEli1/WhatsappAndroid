@@ -66,7 +66,7 @@ public class ChatListActivity extends AppCompatActivity {
         db = Room.databaseBuilder(getApplicationContext(),
                 AppDB.class, "ContactsDB").allowMainThreadQueries().build();
         contactDao = db.contactDao();
-        contacts = contactDao.index();
+         contacts = contactDao.index();
         ContactAPI contactAPI = new ContactAPI(contacts, contactDao, userName);
         contactAPI.get();
         listView = findViewById(R.id.list_view);
