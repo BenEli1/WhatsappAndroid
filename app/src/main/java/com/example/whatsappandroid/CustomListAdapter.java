@@ -38,9 +38,9 @@ public class CustomListAdapter extends ArrayAdapter<Contact> {
         TextView time = convertView.findViewById(R.id.time);
 
         imageView.setImageResource(contact.getPictureId());
-        userName.setText(contact.getUserName());
-        lastMsg.setText(contact.getLastMassage());
-        time.setText(contact.getLastMassageSendingTime());
+        userName.setText(contact.getId());
+        lastMsg.setText(contact.getLast());
+        time.setText(contact.getLastdate());
 
         return convertView;
     }

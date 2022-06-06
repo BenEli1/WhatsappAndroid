@@ -12,15 +12,13 @@ import java.util.List;
 public interface ContactDao {
     @Query("SELECT * FROM Contact")
     List<Contact> index();
-    @Query("SELECT * FROM Contact WHERE id = :id")
-    Contact get(int id);
-
+    @Query("SELECT * FROM Contact WHERE id = :id and username= :username")
+    Contact get(String id,String username);
     @Insert
     void insert(Contact... contacts);
     @Update
     void update(Contact... contacts);
     @Delete
     void delete(Contact... contacts);
-
 
 }

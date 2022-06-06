@@ -9,6 +9,7 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import com.example.whatsappandroid.api.ContactAPI;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -55,11 +56,19 @@ public class ChatListActivity extends AppCompatActivity {
 
 //            contacts.add(aContact);
 //        }
+        Intent activityIntent = getIntent();
+        String userName;
+        if (activityIntent != null) {
+            userName = activityIntent.getStringExtra("Username");
+        } else {
+            userName = "";
+        }
         db = Room.databaseBuilder(getApplicationContext(),
                 AppDB.class, "ContactsDB").allowMainThreadQueries().build();
         contactDao = db.contactDao();
-        contacts=contactDao.index();
-
+        contacts = contactDao.index();
+        ContactAPI contactAPI = new ContactAPI(contacts, contactDao, userName);
+        contactAPI.get();
         listView = findViewById(R.id.list_view);
         adapter = new CustomListAdapter(getApplicationContext(), contacts);
         FloatingActionButton fab = findViewById(R.id.btnAdd);
@@ -67,6 +76,7 @@ public class ChatListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), AddContactActivity.class);
+                intent.putExtra("userName", userName);
                 startActivity(intent);
             }
         });
@@ -75,10 +85,10 @@ public class ChatListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getApplicationContext(), SingleChatActivity.class);
 
-                intent.putExtra("userName", contacts.get(i).getUserName());
+                intent.putExtra("userName", contacts.get(i).getId());
                 intent.putExtra("profilePicture", profilePictures[i]);
-                intent.putExtra("lastMassage", contacts.get(i).getLastMassage());
-                intent.putExtra("time", contacts.get(i).getLastMassageSendingTime());
+                intent.putExtra("lastMassage", contacts.get(i).getLast());
+                intent.putExtra("time", contacts.get(i).getLastdate());
 
                 startActivity(intent);
             }
@@ -88,6 +98,7 @@ public class ChatListActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
         listView.setClickable(true);
     }
+
     @Override
     protected void onResume() {
         super.onResume();

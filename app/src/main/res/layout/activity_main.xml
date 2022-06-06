@@ -16,7 +16,7 @@
         android:padding="50dp">
 
         <EditText
-            android:id="@+id/editTextUsername"
+            android:id="@+id/editTextUsernameLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -27,7 +27,7 @@
             android:importantForAutofill="no"/>
 
         <EditText
-            android:id="@+id/editTextPassword"
+            android:id="@+id/editTextPasswordLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"

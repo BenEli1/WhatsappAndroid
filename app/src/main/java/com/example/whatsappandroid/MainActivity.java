@@ -13,19 +13,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        EditText editTextUsername = (EditText) findViewById(R.id.editTextUsername);
-        String username = editTextUsername.getText().toString();
-        EditText editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-        String password = editTextPassword.getText().toString();
+
         Button btnRegister = findViewById(R.id.RegisterButton);
         btnRegister.setOnClickListener(v -> {
-        Intent i = new Intent(this,RegisterActivity.class);
-        startActivity(i);
+            Intent i = new Intent(this, RegisterActivity.class);
+            startActivity(i);
         });
         Button btnLogin = findViewById(R.id.LoginButton);
         btnLogin.setOnClickListener(v -> {
             Intent i = new Intent(this, ChatListActivity.class);
-//            i.putExtra("username", username);
+            EditText editTextUsername = findViewById(R.id.editTextUsernameLogin);
+            String username = editTextUsername.getText().toString();
+            EditText editTextPassword = findViewById(R.id.editTextPasswordLogin);
+            String password = editTextPassword.getText().toString();
+            i.putExtra("Username", username);
 //            i.putExtra("password",password);
             startActivity(i);
         });
