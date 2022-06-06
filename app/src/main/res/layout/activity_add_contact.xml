@@ -33,7 +33,7 @@
             android:layout_marginBottom="10dp"
             android:ems="10"
             android:hint="@string/nickname"
-            android:inputType="textPassword"
+            android:inputType="textPersonName"
             android:minHeight="48dp"
             android:importantForAutofill="no"/>
         <EditText
@@ -43,12 +43,12 @@
             android:layout_marginBottom="10dp"
             android:ems="10"
             android:hint="@string/server"
-            android:inputType="textPassword"
+            android:inputType="textPersonName"
             android:minHeight="48dp"
             android:importantForAutofill="no"/>
 
         <Button
-            android:id="@+id/LoginButton"
+            android:id="@+id/addContactButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -56,7 +56,7 @@
             android:textAllCaps="false"
             android:backgroundTint="#CCCCCC"/>
         <Button
-            android:id="@+id/BackButton"
+            android:id="@+id/backContactButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

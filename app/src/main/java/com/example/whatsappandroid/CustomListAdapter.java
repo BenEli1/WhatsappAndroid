@@ -8,17 +8,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class CustomListAdapter extends ArrayAdapter<User> {
+public class CustomListAdapter extends ArrayAdapter<Contact> {
     LayoutInflater inflater;
 
-    public CustomListAdapter(Context ctx, ArrayList<User> userArrayList) {
-        super(ctx, R.layout.custom_list_item, userArrayList);
+    public CustomListAdapter(Context ctx, List<Contact> contactArrayList) {
+        super(ctx, R.layout.custom_list_item, contactArrayList);
 
         this.inflater = LayoutInflater.from(ctx);
     }
@@ -27,7 +26,7 @@ public class CustomListAdapter extends ArrayAdapter<User> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        User user = getItem(position);
+        Contact contact = getItem(position);
 
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.custom_list_item, parent, false);
@@ -38,10 +37,10 @@ public class CustomListAdapter extends ArrayAdapter<User> {
         TextView lastMsg = convertView.findViewById(R.id.last_massage);
         TextView time = convertView.findViewById(R.id.time);
 
-        imageView.setImageResource(user.getPictureId());
-        userName.setText(user.getUserName());
-        lastMsg.setText(user.getLastMassage());
-        time.setText(user.getLastMassageSendingTime());
+        imageView.setImageResource(contact.getPictureId());
+        userName.setText(contact.getUserName());
+        lastMsg.setText(contact.getLastMassage());
+        time.setText(contact.getLastMassageSendingTime());
 
         return convertView;
     }

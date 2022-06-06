@@ -25,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
         Button btnLogin = findViewById(R.id.LoginButton);
         btnLogin.setOnClickListener(v -> {
             Intent i = new Intent(this, ChatListActivity.class);
-            i.putExtra("username", username);
-            i.putExtra("password",password);
+//            i.putExtra("username", username);
+//            i.putExtra("password",password);
             startActivity(i);
         });
 
