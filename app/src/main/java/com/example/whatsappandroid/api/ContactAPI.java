@@ -18,6 +18,7 @@ public class ContactAPI {
     private Retrofit retrofit;
     private WebServiceAPI webServiceAPI;
     private String Username;
+
     public ContactAPI(List<Contact> postListData, ContactDao dao,String username) {
         this.postListData = postListData;
         this.dao = dao;
@@ -27,6 +28,7 @@ public class ContactAPI {
                 .baseUrl(MyApplication.context.getString(R.string.BaseUrl))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+
         webServiceAPI = retrofit.create(WebServiceAPI.class);
     }
 
@@ -36,8 +38,7 @@ public class ContactAPI {
             @Override
             public void onResponse(Call<List<Contact>> call, retrofit2.Response<List<Contact>> response) {
                 postListData.clear();
-                postListData = response.body();
-                postListData.addAll(dao.index());
+                postListData.addAll(response.body());
 
             }
 

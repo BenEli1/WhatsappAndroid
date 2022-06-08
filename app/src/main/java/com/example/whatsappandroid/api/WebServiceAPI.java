@@ -8,11 +8,12 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface WebServiceAPI {
-    @GET("contacts")
-    Call<List<Contact>> getContacts(String username);
+    @GET("api/contacts")
+    Call<List<Contact>> getContacts(@Query("username") String username);
 
-    @POST("contacts")
+    @POST("api/contacts")
     Call<Void> createContact(@Body Contact contact, String Username);
 }
