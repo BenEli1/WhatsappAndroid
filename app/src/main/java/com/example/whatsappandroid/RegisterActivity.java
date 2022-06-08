@@ -53,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
             userAPI.post(newUser);
 
             Intent i = new Intent(this, ChatListActivity.class);
-            i.putExtra("username", username);
+            i.putExtra("Username", username);
             i.putExtra("password",password);
             startActivity(i);
         });
