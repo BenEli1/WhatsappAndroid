@@ -37,15 +37,16 @@ public class MainActivity extends AppCompatActivity {
         });
         Button btnLogin = findViewById(R.id.LoginButton);
         btnLogin.setOnClickListener(v -> {
+            userAPI.get();
+            users.addAll(UserDao.index());
             Intent i = new Intent(this, ChatListActivity.class);
             EditText editTextUsername = findViewById(R.id.editTextUsernameLogin);
             String username = editTextUsername.getText().toString();
             EditText editTextPassword = findViewById(R.id.editTextPasswordLogin);
             String password = editTextPassword.getText().toString();
-            userAPI.get();
             //users.addAll(UserDao.index());
             for(User user : users){
-                if(user.getUserUserName() == username && user.getPassword() == password){
+                if(user.getUserUserName().equals(username)  && user.getPassword().equals(password)){
                     i.putExtra("Username", username);
                     startActivity(i);
                     break;

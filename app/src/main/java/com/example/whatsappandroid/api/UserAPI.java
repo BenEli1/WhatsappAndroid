@@ -39,7 +39,6 @@ public class UserAPI {
             public void onResponse(Call<List<User>> call, retrofit2.Response<List<User>> response) {
                 postListData.clear();
                 postListData.addAll(response.body());
-
             }
 
             @Override
