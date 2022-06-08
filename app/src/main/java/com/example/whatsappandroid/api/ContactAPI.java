@@ -47,4 +47,17 @@ public class ContactAPI {
             }
         });
     }
+
+    public void post(Contact contact) {
+        Call call = webServiceAPI.createContact(contact,this.Username);
+        call.enqueue(new Callback<List<Contact>>() {
+            @Override
+            public void onResponse(Call<List<Contact>> call, retrofit2.Response<List<Contact>> response) {
+            }
+
+            @Override
+            public void onFailure(Call<List<Contact>> call, Throwable t) {
+            }
+        });
+    }
 }

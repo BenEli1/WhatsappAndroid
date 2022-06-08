@@ -8,6 +8,8 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import com.example.whatsappandroid.api.ContactAPI;
+
 public class AddContactActivity extends AppCompatActivity {
     private AppDB db;
     private ContactDao contactDao;
@@ -19,7 +21,7 @@ public class AddContactActivity extends AppCompatActivity {
         Intent activityIntent = getIntent();
         String userName;
         if (activityIntent != null) {
-            userName = activityIntent.getStringExtra("Username");
+            userName = activityIntent.getStringExtra("username");
         } else {
             userName = "";
         }
@@ -36,7 +38,9 @@ public class AddContactActivity extends AppCompatActivity {
             EditText etServer= findViewById(R.id.editTextServer);
 
             Contact contact = new Contact(etUsername.getText().toString(),
-                    0,"",etNickname.getText().toString(),etServer.getText().toString(),"",userName);
+                    0,"",etNickname.getText().toString(),etServer.getText().toString(),"", userName);
+            ContactAPI contactAPI = new ContactAPI(null, contactDao, userName);
+            contactAPI.post(contact);
             contactDao.insert(contact);
             finish();
         });

@@ -21,7 +21,6 @@ public class ChatListActivity extends AppCompatActivity {
             R.drawable.blue, R.drawable.gold, R.drawable.green,
             R.drawable.red, R.drawable.lightblue, R.drawable.custom_button
     };
-
 //    final private String[] userNames = {
 //            "Blue User", "Golden User", "Green User", "Red User", "Lightblue User", "Gray User"
 //    };
@@ -40,6 +39,7 @@ public class ChatListActivity extends AppCompatActivity {
     private AppDB db;
     private ContactDao contactDao;
     private List<Contact> contacts;
+    private ContactAPI contactAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +68,7 @@ public class ChatListActivity extends AppCompatActivity {
                 AppDB.class, "ContactsDB").allowMainThreadQueries().build();
         contactDao = db.contactDao();
         //contacts = contactDao.index();
-        ContactAPI contactAPI = new ContactAPI(contacts, contactDao, userName);
+        contactAPI = new ContactAPI(contacts, contactDao, userName);
         contactAPI.get();
         listView = findViewById(R.id.list_view);
         adapter = new CustomListAdapter(getApplicationContext(), contacts);
@@ -77,7 +77,7 @@ public class ChatListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), AddContactActivity.class);
-                intent.putExtra("userName", userName);
+                intent.putExtra("username", userName);
                 startActivity(intent);
             }
         });
@@ -103,6 +103,8 @@ public class ChatListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        contacts.clear();
+        contactAPI.get();
         contacts.clear();
         contacts.addAll(contactDao.index());
         adapter.notifyDataSetChanged();

@@ -15,5 +15,5 @@ public interface WebServiceAPI {
     Call<List<Contact>> getContacts(@Query("username") String username);
 
     @POST("api/contacts")
-    Call<Void> createContact(@Body Contact contact, String Username);
+    Call<Void> createContact(@Body Contact contact, @Query("username") String Username);
 }
