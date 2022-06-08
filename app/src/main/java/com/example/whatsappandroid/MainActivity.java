@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 }
             }
-            //put error message
+            //put error message(incorrect password or username)
         });
 
     }

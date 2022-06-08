@@ -44,6 +44,8 @@ public class ContactAPI {
 
             @Override
             public void onFailure(Call<List<Contact>> call, Throwable t) {
+                postListData.clear();
+                postListData.addAll(dao.index(Username));
             }
         });
     }

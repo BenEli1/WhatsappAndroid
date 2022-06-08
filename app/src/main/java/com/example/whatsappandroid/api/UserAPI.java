@@ -43,6 +43,8 @@ public class UserAPI {
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
+                postListData.clear();
+                postListData.addAll(dao.index());
             }
         });
     }

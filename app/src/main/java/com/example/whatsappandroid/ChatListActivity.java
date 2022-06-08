@@ -47,17 +47,6 @@ public class ChatListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_list);
         contacts = new ArrayList<Contact>();
-        //listView=findViewById(R.id.list_view);
-//        ArrayList<Contact> contacts = new ArrayList<>();
-
-//        for (int i = 0; i < profilePictures.length; i++) {
-//            Contact aContact = new Contact(
-//                    userNames[i], profilePictures[i],
-//                    lastMassages[i], times[i]
-//            );
-
-//            contacts.add(aContact);
-//        }
         Intent activityIntent = getIntent();
 
         if (activityIntent != null) {
@@ -87,7 +76,8 @@ public class ChatListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getApplicationContext(), SingleChatActivity.class);
 
-                intent.putExtra("userName", contacts.get(i).getId());
+                intent.putExtra("Username", userName);
+                intent.putExtra("ContactName", contacts.get(i).getId());
                 intent.putExtra("profilePicture", profilePictures[i]);
                 intent.putExtra("lastMassage", contacts.get(i).getLast());
                 intent.putExtra("time", contacts.get(i).getLastdate());
