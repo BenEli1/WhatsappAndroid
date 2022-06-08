@@ -40,6 +40,7 @@ public class ChatListActivity extends AppCompatActivity {
     private ContactDao contactDao;
     private List<Contact> contacts;
     private ContactAPI contactAPI;
+    private String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,7 @@ public class ChatListActivity extends AppCompatActivity {
 //            contacts.add(aContact);
 //        }
         Intent activityIntent = getIntent();
-        String userName;
+
         if (activityIntent != null) {
             userName = activityIntent.getStringExtra("Username");
         } else {
@@ -106,7 +107,7 @@ public class ChatListActivity extends AppCompatActivity {
         contacts.clear();
         contactAPI.get();
         contacts.clear();
-        contacts.addAll(contactDao.index());
+        contacts.addAll(contactDao.index(userName));
         adapter.notifyDataSetChanged();
     }
 }

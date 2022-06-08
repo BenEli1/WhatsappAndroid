@@ -6,14 +6,30 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
+
+import com.example.whatsappandroid.api.ContactAPI;
+import com.example.whatsappandroid.api.UserAPI;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private AppUserDB db;
+    private UserDao UserDao;
+    private List<User> users;
+    private UserAPI userAPI;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        db = Room.databaseBuilder(getApplicationContext(),
+                AppUserDB.class, "UsersDB").allowMainThreadQueries().build();
+        UserDao = db.userDao();
+        users = new ArrayList<User>();
+        userAPI = new UserAPI(users, UserDao);
         Button btnRegister = findViewById(R.id.RegisterButton);
         btnRegister.setOnClickListener(v -> {
             Intent i = new Intent(this, RegisterActivity.class);
@@ -26,9 +42,16 @@ public class MainActivity extends AppCompatActivity {
             String username = editTextUsername.getText().toString();
             EditText editTextPassword = findViewById(R.id.editTextPasswordLogin);
             String password = editTextPassword.getText().toString();
-            i.putExtra("Username", username);
-//            i.putExtra("password",password);
-            startActivity(i);
+            userAPI.get();
+            //users.addAll(UserDao.index());
+            for(User user : users){
+                if(user.getUserUserName() == username && user.getPassword() == password){
+                    i.putExtra("Username", username);
+                    startActivity(i);
+                    break;
+                }
+            }
+            //put error message
         });
 
     }
