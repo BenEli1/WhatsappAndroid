@@ -11,18 +11,20 @@
         tools:listitem="@layout/custom_list_item">
 
         </ListView>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        app:srcCompat="@drawable/ic_action_name"
-        android:backgroundTint="@color/gray"
-        android:background="@color/gray"
         android:layout_gravity="end|bottom"
+        android:background="@color/gray"
+        android:backgroundTint="@color/gray"
+        android:clickable="true"
+        app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:borderWidth="0dp"/>
+        app:srcCompat="@drawable/ic_action_name"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 
 

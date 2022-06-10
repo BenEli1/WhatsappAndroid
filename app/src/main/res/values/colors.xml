@@ -13,4 +13,8 @@
     <color name="deep_orange">#F53803</color>
     <color name="light_orange">#F5D020</color>
     <color name="deep_orange_variant">#FCE83502</color>
+
+    <color name="colorPrimary">#8BC34A</color>
+    <color name="colorPrimaryDark">#689F38</color>
+    <color name="colorAccent">#FF4081</color>
 </resources>
