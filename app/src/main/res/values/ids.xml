@@ -4,4 +4,6 @@
     <item name="editTextPassword" type="id" />
     <item name="LoginButton" type="id" />
     <item name="RegisterButton" type="id" />
+    <item name="user_image_profile_image" type="id" />
+    <item name="user_text_user_name" type="id" />
 </resources>
