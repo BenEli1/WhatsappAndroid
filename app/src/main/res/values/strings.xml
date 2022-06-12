@@ -26,4 +26,13 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="payAttenrion">Pay Attention!</string>
+    <string name="UsernameRequired">Username is Required</string>
+    <string name="PasswordRequired">Password is Required</string>
+    <string name="IncorrectInPut">Username or Password is Incorrect</string>
+    <string name="ConfirmPasswordReqires">Confirm Password is Required</string>
+    <string name="NicknameRequired">Nickname is Required</string>
+    <string name="InvalidUsername">Username must be at least 3 letters</string>
+    <string name="PasswordsNotEqual">Passwords are not equal</string>
+    <string name="PasswordInvalid">Password must contain at least one number and one big character and the length can be between 6-20 characters</string>
 </resources>
