@@ -1,11 +1,13 @@
 package com.example.whatsappandroid;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
@@ -13,10 +15,13 @@ import com.example.whatsappandroid.api.ContactAPI;
 import com.example.whatsappandroid.api.MessageAPI;
 import com.example.whatsappandroid.api.UserAPI;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 public class SingleChatActivity extends AppCompatActivity {
 
     ImageView profilePictureView;
@@ -30,6 +35,7 @@ public class SingleChatActivity extends AppCompatActivity {
     private MessageAPI messageAPI;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,9 +65,11 @@ public class SingleChatActivity extends AppCompatActivity {
         sendMessage.setOnClickListener(view -> {
             EditText text = findViewById(R.id.Edit_Text_Msg_Send);
             String messageText = text.getText().toString();
-            Date date = new Date();
-            Message newMessage = new Message(this.ContactUserName, this.UserName, messageText, "", "true");
-
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+            Message newMessage = new Message(this.ContactUserName, this.UserName, messageText, now.toString(), "true");
+            messageDao.insert(newMessage);
+            messageAPI.post(newMessage);
         });
 
 
