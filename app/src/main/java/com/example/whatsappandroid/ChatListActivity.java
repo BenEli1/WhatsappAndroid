@@ -77,7 +77,8 @@ public class ChatListActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), SingleChatActivity.class);
 
                 intent.putExtra("Username", userName);
-                intent.putExtra("ContactName", contacts.get(i).getId());
+                intent.putExtra("ContactUserName", contacts.get(i).getId());
+                intent.putExtra("ContactNickName", contacts.get(i).getName());
                 intent.putExtra("profilePicture", profilePictures[i]);
                 intent.putExtra("lastMassage", contacts.get(i).getLast());
                 intent.putExtra("time", contacts.get(i).getLastdate());

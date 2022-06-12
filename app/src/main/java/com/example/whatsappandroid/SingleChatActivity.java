@@ -20,7 +20,8 @@ public class SingleChatActivity extends AppCompatActivity {
     ImageView profilePictureView;
     TextView userNameView;
     private String UserName;
-    private String ContactName;
+    private String ContactUserName;
+    private String ContactNickName;
     private AppMessageDB db;
     private MessageDao messageDao;
     private List<Message> messages;
@@ -36,20 +37,21 @@ public class SingleChatActivity extends AppCompatActivity {
         Intent activityIntent = getIntent();
 
         if (activityIntent != null) {
-            ContactName = activityIntent.getStringExtra("ContactName");
+            ContactUserName = activityIntent.getStringExtra("ContactUserName");
+            ContactNickName = activityIntent.getStringExtra("ContactNickName");
             UserName = activityIntent.getStringExtra("Username");
             int profilePicture = activityIntent.getIntExtra("profilePicture", R.drawable.blue);
             profilePictureView = findViewById(R.id.user_image_profile_image);
             userNameView = findViewById(R.id.user_text_user_name);
             profilePictureView.setImageResource(profilePicture);
-            userNameView.setText("username: " + UserName + " is talking with: " + ContactName);
+            userNameView.setText("username: " + UserName + " is talking with: " + ContactNickName);
         }
 
         db = Room.databaseBuilder(getApplicationContext(),
                 AppMessageDB.class, "MessageDB").allowMainThreadQueries().build();
         messageDao = db.messageDao();
         //contacts = contactDao.index();
-        messageAPI = new MessageAPI(messages, messageDao, UserName, ContactName);
+        messageAPI = new MessageAPI(messages, messageDao, UserName, ContactUserName);
 
 
     }
