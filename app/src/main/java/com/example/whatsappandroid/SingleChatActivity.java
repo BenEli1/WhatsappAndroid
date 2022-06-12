@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -29,10 +30,14 @@ public class SingleChatActivity extends AppCompatActivity {
     private String UserName;
     private String ContactUserName;
     private String ContactNickName;
-    private AppMessageDB db;
+    private AppMessageDB dbMessage;
+    private AppDB dbContact;
     private MessageDao messageDao;
+    private ContactDao contactDao;
     private List<Message> messages;
     private MessageAPI messageAPI;
+    private CustomMsgAdapter adapter;
+    private ListView listView;
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -50,16 +55,29 @@ public class SingleChatActivity extends AppCompatActivity {
             UserName = activityIntent.getStringExtra("Username");
             int profilePicture = activityIntent.getIntExtra("profilePicture", R.drawable.blue);
             profilePictureView = findViewById(R.id.user_image_profile_image);
-            userNameView = findViewById(R.id.user_text_user_name);
-            profilePictureView.setImageResource(profilePicture);
-            userNameView.setText("username: " + UserName + " is talking with: " + ContactNickName);
+            //profilePictureView.setImageResource(profilePicture);
+
         }
 
-        db = Room.databaseBuilder(getApplicationContext(),
+        TextView viewContact = findViewById(R.id.current_user);
+        viewContact.setText(this.ContactNickName);
+
+        dbMessage = Room.databaseBuilder(getApplicationContext(),
                 AppMessageDB.class, "MessageDB").allowMainThreadQueries().build();
-        messageDao = db.messageDao();
+        messageDao = dbMessage.messageDao();
+
+        dbContact = Room.databaseBuilder(getApplicationContext(),
+                AppDB.class, "ContactsDB").allowMainThreadQueries().build();
+        contactDao = dbContact.contactDao();
+
         //contacts = contactDao.index();
         messageAPI = new MessageAPI(messages, messageDao, UserName, ContactUserName);
+
+        messageAPI.get();
+        adapter = new CustomMsgAdapter(getApplicationContext(), messages);
+
+        listView = findViewById(R.id.msg_view);
+        listView.setAdapter(adapter);
 
         ImageView sendMessage = findViewById(R.id.send_button);
         sendMessage.setOnClickListener(view -> {
@@ -70,6 +88,13 @@ public class SingleChatActivity extends AppCompatActivity {
             Message newMessage = new Message(this.ContactUserName, this.UserName, messageText, now.toString(), "true");
             messageDao.insert(newMessage);
             messageAPI.post(newMessage);
+            Contact contact = contactDao.get(ContactUserName, UserName);
+            contact.setLastdate(now.toString());
+            contact.setLast(messageText);
+            contactDao.update(contact);
+
+            listView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
         });
 
 
