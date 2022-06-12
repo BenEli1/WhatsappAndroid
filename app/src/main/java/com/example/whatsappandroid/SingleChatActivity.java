@@ -73,7 +73,9 @@ public class SingleChatActivity extends AppCompatActivity {
         //contacts = contactDao.index();
         messageAPI = new MessageAPI(messages, messageDao, UserName, ContactUserName);
 
-        messageAPI.get();
+        //messageAPI.get();
+        messages.clear();
+        messages.addAll(messageDao.index(UserName, ContactUserName));
         adapter = new CustomMsgAdapter(getApplicationContext(), messages);
 
         listView = findViewById(R.id.msg_view);
@@ -92,7 +94,8 @@ public class SingleChatActivity extends AppCompatActivity {
             contact.setLastdate(now.toString());
             contact.setLast(messageText);
             contactDao.update(contact);
-
+            messages.clear();
+            messages.addAll(messageDao.index(UserName, ContactUserName));
             listView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
         });
