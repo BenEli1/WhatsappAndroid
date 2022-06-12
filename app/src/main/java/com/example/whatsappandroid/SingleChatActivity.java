@@ -2,6 +2,7 @@ package com.example.whatsappandroid;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ import com.example.whatsappandroid.api.MessageAPI;
 import com.example.whatsappandroid.api.UserAPI;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class SingleChatActivity extends AppCompatActivity {
@@ -52,6 +54,15 @@ public class SingleChatActivity extends AppCompatActivity {
         messageDao = db.messageDao();
         //contacts = contactDao.index();
         messageAPI = new MessageAPI(messages, messageDao, UserName, ContactUserName);
+
+        ImageView sendMessage = findViewById(R.id.send_button);
+        sendMessage.setOnClickListener(view -> {
+            EditText text = findViewById(R.id.Edit_Text_Msg_Send);
+            String messageText = text.getText().toString();
+            Date date = new Date();
+            Message newMessage = new Message(this.ContactUserName, this.UserName, messageText, "", "true");
+
+        });
 
 
     }
