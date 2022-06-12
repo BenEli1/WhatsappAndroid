@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.whatsappandroid.AppDB;
 import com.example.whatsappandroid.Classes.Message;
 import com.example.whatsappandroid.Adapters.CustomMsgAdapter;
-import com.example.whatsappandroid.Dao.MessageDao;
 import com.example.whatsappandroid.R;
 
 import java.util.ArrayList;
