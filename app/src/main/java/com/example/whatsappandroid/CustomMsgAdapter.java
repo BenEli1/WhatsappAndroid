@@ -34,7 +34,7 @@ public class CustomMsgAdapter extends ArrayAdapter<Message> {
         }
 
 
-        TextView lastMsg = convertView.findViewById(R.id.Edit_Text_Msg_Send);
+        TextView lastMsg = convertView.findViewById(R.id.msg_sent);
         TextView time = convertView.findViewById(R.id.time_chat);
 
         lastMsg.setText(msg.getContect());
