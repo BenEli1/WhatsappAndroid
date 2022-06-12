@@ -35,4 +35,6 @@
     <string name="InvalidUsername">Username must be at least 3 letters</string>
     <string name="PasswordsNotEqual">Passwords are not equal</string>
     <string name="PasswordInvalid">Password must contain at least one number and one big character and the length can be between 6-20 characters</string>
+    <string name="ServerRequired">Server is Required</string>
+    <string name="ContactAlreadyExist">This Contact Already Exists</string>
 </resources>

@@ -1,5 +1,7 @@
 package com.example.whatsappandroid;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -10,9 +12,48 @@ import androidx.room.Room;
 
 import com.example.whatsappandroid.api.ContactAPI;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AddContactActivity extends AppCompatActivity {
     private AppDB db;
     private ContactDao contactDao;
+    private EditText etUsername;
+    private EditText etNickname;
+    private EditText etServer;
+
+    private void cleatAllFields(){
+        etUsername.setText("");
+        etNickname.setText("");
+        etServer.setText("");
+    }
+
+    private void errorValidation(String Title,String messageError)
+    {
+        AlertDialog.Builder builder
+                = new AlertDialog
+                .Builder(AddContactActivity.this);
+        builder.setMessage(messageError);
+        builder.setTitle(Title);
+        builder.setCancelable(false);
+        builder
+                .setNegativeButton(
+                        "OK",
+                        new DialogInterface
+                                .OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int which)
+                            {
+                                dialog.cancel();
+                            }
+                        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,12 +74,40 @@ public class AddContactActivity extends AppCompatActivity {
 
         Button addContactButton = findViewById(R.id.addContactButton);
         addContactButton.setOnClickListener(view->{
-            EditText etUsername= findViewById(R.id.editTextUsername2);
-            EditText etNickname= findViewById(R.id.editTextNickName2);
-            EditText etServer= findViewById(R.id.editTextServer);
+            etUsername = findViewById(R.id.editTextUsername2);
+            String usernameText = etUsername.getText().toString();
+            etNickname = findViewById(R.id.editTextNickName2);
+            String nickNameText = etNickname.getText().toString();
+            etServer = findViewById(R.id.editTextServer);
+            String serverText = etServer.getText().toString();
 
-            Contact contact = new Contact(etUsername.getText().toString(),
-                    0,"",etNickname.getText().toString(),etServer.getText().toString(),"", userName);
+            if(usernameText.equals("")){
+                cleatAllFields();
+                errorValidation(getString(R.string.payAttenrion),getString(R.string.UsernameRequired));
+                return;
+            }
+            if(nickNameText.equals("")){
+                cleatAllFields();
+                errorValidation(getString(R.string.payAttenrion),getString(R.string.NicknameRequired));
+                return;
+            }
+            if(serverText.equals("")){
+                cleatAllFields();
+                errorValidation(getString(R.string.payAttenrion),getString(R.string.ServerRequired));
+                return;
+            }
+
+            List<Contact> contacts = new ArrayList<Contact>(contactDao.index(userName));
+            for(Contact contact : contacts){
+                if(contact.getId().equals(usernameText)){
+                    cleatAllFields();
+                    errorValidation(getString(R.string.payAttenrion),getString(R.string.ContactAlreadyExist));
+                    return;
+                }
+            }
+
+            Contact contact = new Contact(usernameText,
+                    0,"",nickNameText,serverText,"", userName);
             ContactAPI contactAPI = new ContactAPI(null, contactDao, userName);
             contactAPI.post(contact);
             contactDao.insert(contact);
