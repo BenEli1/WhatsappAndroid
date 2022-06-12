@@ -1,11 +1,9 @@
 package com.example.whatsappandroid.api;
 
-import com.example.whatsappandroid.Contact;
-import com.example.whatsappandroid.ContactDao;
 import com.example.whatsappandroid.MyApplication;
 import com.example.whatsappandroid.R;
-import com.example.whatsappandroid.User;
-import com.example.whatsappandroid.UserDao;
+import com.example.whatsappandroid.Classes.User;
+import com.example.whatsappandroid.Dao.UserDao;
 
 import java.util.List;
 

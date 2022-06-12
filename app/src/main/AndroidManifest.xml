@@ -33,22 +33,22 @@
             android:required="false" />
 
         <activity
-            android:name=".SettingsActivity"
+            android:name=".Activities.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".AddContactActivity"
+            android:name=".Activities.AddContactActivity"
             android:exported="false" />
         <activity
-            android:name=".SingleChatActivity"
+            android:name=".Activities.SingleChatActivity"
             android:exported="false" />
         <activity
-            android:name=".ChatListActivity"
+            android:name=".Activities.ChatListActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".Activities.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

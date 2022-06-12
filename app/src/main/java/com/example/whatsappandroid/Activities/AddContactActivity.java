@@ -1,4 +1,4 @@
-package com.example.whatsappandroid;
+package com.example.whatsappandroid.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,10 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import com.example.whatsappandroid.AppDB;
+import com.example.whatsappandroid.Classes.Contact;
+import com.example.whatsappandroid.Dao.ContactDao;
+import com.example.whatsappandroid.R;
 import com.example.whatsappandroid.api.ContactAPI;
 
 public class AddContactActivity extends AppCompatActivity {

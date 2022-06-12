@@ -1,4 +1,4 @@
-package com.example.whatsappandroid;
+package com.example.whatsappandroid.Classes;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;

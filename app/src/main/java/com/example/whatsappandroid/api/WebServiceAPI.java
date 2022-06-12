@@ -1,7 +1,7 @@
 package com.example.whatsappandroid.api;
 
-import com.example.whatsappandroid.Contact;
-import com.example.whatsappandroid.User;
+import com.example.whatsappandroid.Classes.Contact;
+import com.example.whatsappandroid.Classes.User;
 
 import java.util.List;
 

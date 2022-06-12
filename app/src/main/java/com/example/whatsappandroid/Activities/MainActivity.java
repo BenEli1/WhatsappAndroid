@@ -1,4 +1,4 @@
-package com.example.whatsappandroid;
+package com.example.whatsappandroid.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,9 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
-import com.example.whatsappandroid.api.ContactAPI;
+import com.example.whatsappandroid.AppUserDB;
+import com.example.whatsappandroid.Classes.User;
+import com.example.whatsappandroid.R;
 import com.example.whatsappandroid.api.UserAPI;
 
 import java.util.ArrayList;
@@ -17,7 +19,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private AppUserDB db;
-    private UserDao UserDao;
+    private com.example.whatsappandroid.Dao.UserDao UserDao;
     private List<User> users;
     private UserAPI userAPI;
     @Override
