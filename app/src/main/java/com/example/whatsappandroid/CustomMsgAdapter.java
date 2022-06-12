@@ -18,7 +18,7 @@ public class CustomMsgAdapter extends ArrayAdapter<Message> {
     LayoutInflater inflater;
 
     public CustomMsgAdapter(Context ctx, List<Message> MessageArrayList) {
-        super(ctx, R.layout.custom_list_item, MessageArrayList);
+        super(ctx, R.layout.custom_msg_incoming, MessageArrayList);
 
         this.inflater = LayoutInflater.from(ctx);
     }
@@ -34,8 +34,8 @@ public class CustomMsgAdapter extends ArrayAdapter<Message> {
         }
 
 
-        TextView lastMsg = convertView.findViewById(R.id.last_massage);
-        TextView time = convertView.findViewById(R.id.time);
+        TextView lastMsg = convertView.findViewById(R.id.Edit_Text_Msg_Send);
+        TextView time = convertView.findViewById(R.id.time_chat);
 
         lastMsg.setText(msg.getContect());
         time.setText(msg.getCreated());
