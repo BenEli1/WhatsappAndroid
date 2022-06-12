@@ -9,7 +9,6 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.whatsappandroid.AppDB;
-import com.example.whatsappandroid.Classes.Message;
 import com.example.whatsappandroid.Adapters.CustomMsgAdapter;
 import com.example.whatsappandroid.R;
 
