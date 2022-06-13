@@ -16,6 +16,7 @@ import androidx.room.Room;
 
 import com.example.whatsappandroid.api.ContactAPI;
 import com.example.whatsappandroid.api.MessageAPI;
+import com.example.whatsappandroid.api.TransferAPI;
 import com.example.whatsappandroid.api.UserAPI;
 
 import java.time.LocalDateTime;
@@ -90,21 +91,48 @@ public class SingleChatActivity extends AppCompatActivity {
 
         ImageView sendMessage = findViewById(R.id.send_button);
         sendMessage.setOnClickListener(view -> {
+
+            //the message
             EditText text = findViewById(R.id.Edit_Text_Msg_Send);
             String messageText = text.getText().toString();
+
+            //check that the message is not empty
+            if(messageText.equals("")){
+                return;
+            }
+
+            //clear the message
+            text.setText("");
+
+            //generate date
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
             LocalDateTime now = LocalDateTime.now();
+
+            //create the new message
             Message newMessage = new Message(this.ContactUserName, this.UserName, messageText, now.toString(), "true");
+
+            //send the new message
             messageDao.insert(newMessage);
             messageAPI.post(newMessage);
+
+            //change the contact
             Contact contact = contactDao.get(ContactUserName, UserName);
             contact.setLastdate(now.toString());
             contact.setLast(messageText);
             contactDao.update(contact);
+
+            //display the new message
             messages.clear();
             messages.addAll(messageDao.index(UserName, ContactUserName));
             mMessageRecycler.setAdapter(adapter);
             adapter.notifyDataSetChanged();
+
+            //send the transfer
+            List<transfer> transfers = new ArrayList<transfer>();
+            TransferAPI transferAPI = new TransferAPI(transfers, contactServer);
+            transfer transfer = new transfer(UserName, ContactUserName, messageText);
+            transferAPI.post(transfer);
         });
+
     }
 }
