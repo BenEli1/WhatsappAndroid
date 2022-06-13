@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import com.example.whatsappandroid.api.ContactAPI;
@@ -23,6 +25,7 @@ import java.util.Date;
 import java.util.List;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+
 public class SingleChatActivity extends AppCompatActivity {
 
     ImageView profilePictureView;
@@ -38,7 +41,9 @@ public class SingleChatActivity extends AppCompatActivity {
     private MessageAPI messageAPI;
     private CustomMsgAdapter adapter;
     private ListView listView;
-
+    private RecyclerView mMessageRecycler;
+    private CustomMsgAdapter mMessageAdapter;
+    private String contactServer;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -78,8 +83,10 @@ public class SingleChatActivity extends AppCompatActivity {
         messages.addAll(messageDao.index(UserName, ContactUserName));
         adapter = new CustomMsgAdapter(getApplicationContext(), messages);
 
-        listView = findViewById(R.id.msg_view);
-        listView.setAdapter(adapter);
+        mMessageRecycler = (RecyclerView) findViewById(R.id.msg_view);
+        mMessageRecycler.setLayoutManager(new LinearLayoutManager(this));
+        mMessageRecycler.setAdapter(mMessageAdapter);
+        mMessageRecycler.setAdapter(adapter);
 
         ImageView sendMessage = findViewById(R.id.send_button);
         sendMessage.setOnClickListener(view -> {
@@ -96,7 +103,7 @@ public class SingleChatActivity extends AppCompatActivity {
             contactDao.update(contact);
             messages.clear();
             messages.addAll(messageDao.index(UserName, ContactUserName));
-            listView.setAdapter(adapter);
+            mMessageRecycler.setAdapter(adapter);
             adapter.notifyDataSetChanged();
         });
 
