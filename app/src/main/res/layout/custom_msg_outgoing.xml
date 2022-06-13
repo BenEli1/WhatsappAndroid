@@ -16,7 +16,7 @@
         android:layout_marginTop="5dp"
         android:textColor="@color/black"
         android:textDirection="anyRtl"
-        android:textSize="10dp"
+        android:textSize="20dp"
         tools:text="Hi, how are you?"
         android:gravity="center"
         android:background="@drawable/bg_rounded_incoming"
