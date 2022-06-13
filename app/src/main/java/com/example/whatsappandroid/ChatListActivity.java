@@ -82,6 +82,7 @@ public class ChatListActivity extends AppCompatActivity {
                 intent.putExtra("profilePicture", profilePictures[i]);
                 intent.putExtra("lastMassage", contacts.get(i).getLast());
                 intent.putExtra("time", contacts.get(i).getLastdate());
+                intent.putExtra("server", contacts.get(i).getServer());
 
                 startActivity(intent);
             }

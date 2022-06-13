@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import com.example.whatsappandroid.api.ContactAPI;
+import com.example.whatsappandroid.api.InvitationAPI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +74,9 @@ public class AddContactActivity extends AppCompatActivity {
         backContactButton.setOnClickListener(arg0 -> finish());
 
         Button addContactButton = findViewById(R.id.addContactButton);
+
+
+
         addContactButton.setOnClickListener(view->{
             etUsername = findViewById(R.id.editTextUsername2);
             String usernameText = etUsername.getText().toString();
@@ -111,6 +115,15 @@ public class AddContactActivity extends AppCompatActivity {
             ContactAPI contactAPI = new ContactAPI(null, contactDao, userName);
             contactAPI.post(contact);
             contactDao.insert(contact);
+
+            List<Invitation> invitations = new ArrayList<Invitation>();
+
+            //here the server is the new contact's server
+            InvitationAPI invitationAPI = new InvitationAPI(invitations, serverText);
+
+            //here the server is my server!!
+            Invitation invitation = new Invitation(userName,usernameText, MyApplication.context.getString(R.string.BaseUrl));
+            invitationAPI.post(invitation);
             finish();
         });
     }

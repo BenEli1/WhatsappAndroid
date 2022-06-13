@@ -1,8 +1,10 @@
 package com.example.whatsappandroid.api;
 
 import com.example.whatsappandroid.Contact;
+import com.example.whatsappandroid.Invitation;
 import com.example.whatsappandroid.Message;
 import com.example.whatsappandroid.User;
+import com.example.whatsappandroid.transfer;
 
 import java.util.List;
 
@@ -32,4 +34,16 @@ public interface WebServiceAPI {
 
     @POST("api/contacts/{id}/messages")
     Call<Void> postMessage(@Path("id") String contactName, @Query("username") String Username,@Body Message message );
+
+    @GET("api/transfer")
+    Call<List<transfer>> getTransfers();
+
+    @POST("api/transfer")
+    Call<Void> postTransfer(@Body transfer transfer);
+
+    @GET("api/invitations")
+    Call<List<Invitation>> getInvitation();
+
+    @POST("api/invitations")
+    Call<Void> postInvitation(@Body Invitation invitation);
 }

@@ -10,8 +10,6 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import com.example.whatsappandroid.api.ContactAPI;
@@ -40,8 +38,8 @@ public class SingleChatActivity extends AppCompatActivity {
     private MessageAPI messageAPI;
     private CustomMsgAdapter adapter;
     private ListView listView;
-    private RecyclerView mMessageRecycler;
-    private CustomMsgAdapter mMessageAdapter;
+
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +58,7 @@ public class SingleChatActivity extends AppCompatActivity {
             //profilePictureView.setImageResource(profilePicture);
 
         }
+
         TextView viewContact = findViewById(R.id.current_user);
         viewContact.setText(this.ContactNickName);
 
@@ -78,10 +77,9 @@ public class SingleChatActivity extends AppCompatActivity {
         messages.clear();
         messages.addAll(messageDao.index(UserName, ContactUserName));
         adapter = new CustomMsgAdapter(getApplicationContext(), messages);
-        mMessageRecycler = (RecyclerView) findViewById(R.id.msg_view);
-        mMessageRecycler.setLayoutManager(new LinearLayoutManager(this));
-        mMessageRecycler.setAdapter(mMessageAdapter);
-        mMessageRecycler.setAdapter(adapter);
+
+        listView = findViewById(R.id.msg_view);
+        listView.setAdapter(adapter);
 
         ImageView sendMessage = findViewById(R.id.send_button);
         sendMessage.setOnClickListener(view -> {
@@ -98,7 +96,7 @@ public class SingleChatActivity extends AppCompatActivity {
             contactDao.update(contact);
             messages.clear();
             messages.addAll(messageDao.index(UserName, ContactUserName));
-            mMessageRecycler.setAdapter(adapter);
+            listView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
         });
 
