@@ -56,6 +56,7 @@ public class SingleChatActivity extends AppCompatActivity {
         Intent activityIntent = getIntent();
 
         if (activityIntent != null) {
+            contactServer = activityIntent.getStringExtra("server");
             ContactUserName = activityIntent.getStringExtra("ContactUserName");
             ContactNickName = activityIntent.getStringExtra("ContactNickName");
             UserName = activityIntent.getStringExtra("Username");
