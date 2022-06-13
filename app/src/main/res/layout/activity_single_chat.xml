@@ -23,11 +23,11 @@
 
 >
 
-            <ListView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/msg_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:listitem="@layout/custom_msg_incoming"></ListView>
+                android:layout_height="match_parent"/>
+
 
 
 
