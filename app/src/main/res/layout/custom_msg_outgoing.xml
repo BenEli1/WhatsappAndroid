@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/last_massage"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:layout_marginTop="5dp"
@@ -19,13 +19,13 @@
         android:textSize="20dp"
         tools:text="Hi, how are you?"
         android:gravity="center"
-        android:background="@drawable/bg_rounded_incoming"
+        android:background="@drawable/bg_rounded"
         />
     <TextView
 
         android:id="@+id/time_chat"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginLeft="4dp"
         android:gravity="left"
