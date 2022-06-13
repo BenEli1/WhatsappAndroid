@@ -3,15 +3,26 @@ package com.example.whatsappandroid;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Base64;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import com.example.whatsappandroid.api.UserAPI;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,12 +36,121 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText editTextNickName;
     private EditText editTextPasswordCheck;
     private EditText editTextPassword;
+    private Button BSelectImage;
+    private ImageView IVPreviewImage;
+    private String encodedImage;
+    private String encodedString;
+    private final int SELECT_PICTURE = 200;
+
 
     private void cleanAllFeilds(){
         editTextUsername.setText("");
         editTextNickName.setText("");
         editTextPasswordCheck.setText("");
         editTextPassword.setText("");
+    }
+
+    void imageChooser() {
+
+        Intent i = new Intent();
+        i.setType("image/*");
+        i.setAction(Intent.ACTION_GET_CONTENT);
+
+        // pass the constant to compare it
+        // with the returned requestCode
+        startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
+    }
+
+    String encodeImage(Bitmap bitmap) {
+
+        BitmapFactory.Options options = null;
+        options = new BitmapFactory.Options();
+        options.inSampleSize = 3;
+
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        // Must compress the Image to reduce image size to make upload
+        // easy
+        try {
+
+            bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream);
+        } catch (Exception e1) {
+            // TODO Auto-generated catch block
+
+        }
+
+        //System.out.println("SIZE OF BITMAP " + bitmap));
+
+        byte[] byte_arr = stream.toByteArray();
+        // Encode Image to String
+
+        try {
+            encodedString = Base64.encodeToString(byte_arr, 0);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+        }
+
+
+        return encodedString;
+
+    }
+
+    public String BitMapToString(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos);
+        byte[] b = baos.toByteArray();
+        String temp = Base64.encodeToString(b, Base64.DEFAULT);
+        return temp;
+    }
+
+    // this function is triggered when user
+    // selects the image from the imageChooser
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+
+            // compare the resultCode with the
+            // SELECT_PICTURE constant
+            if (requestCode == SELECT_PICTURE) {
+                // Get the url of the image from data
+                Uri selectedImageUri = data.getData();
+                if (null != selectedImageUri) {
+                    // update the preview image in the layout
+                    IVPreviewImage.setImageURI(selectedImageUri);
+                }
+            }
+        }
+        switch (requestCode) {
+            case SELECT_PICTURE:
+                if (resultCode == RESULT_OK) {
+                    try {
+                        final Uri imageUri = data.getData();
+                        String imagepath = imageUri.getPath().toString();
+
+
+                        String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+                        Cursor cursor = getContentResolver().query(imageUri,
+                                filePathColumn, null, null, null);
+                        cursor.moveToFirst();
+
+                        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                        imagepath = cursor.getString(columnIndex);
+                        cursor.close();
+                        //Toast.makeText(PersonalDetails.this,imagepath, Toast.LENGTH_SHORT).show();
+                        final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                        Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+
+                        encodedImage = BitMapToString(selectedImage);
+
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+        }
     }
 
     private void errorValidation(String Title,String messageError)
@@ -63,6 +183,15 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        BSelectImage = findViewById(R.id.BSelectImage);
+        IVPreviewImage = findViewById(R.id.IVPreviewImage);
+
+        BSelectImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageChooser();
+            }
+        });
 
         db = Room.databaseBuilder(getApplicationContext(),
                 AppUserDB.class, "UsersDB").allowMainThreadQueries().build();
