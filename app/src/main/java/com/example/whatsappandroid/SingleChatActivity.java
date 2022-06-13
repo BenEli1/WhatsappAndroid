@@ -128,7 +128,5 @@ public class SingleChatActivity extends AppCompatActivity {
             transfer transfer = new transfer(UserName, ContactUserName, messageText);
             transferAPI.post(transfer);
         });
-
-
     }
 }
