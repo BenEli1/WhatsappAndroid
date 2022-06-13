@@ -41,7 +41,7 @@ public class ChatListActivity extends AppCompatActivity {
     private List<Contact> contacts;
     private ContactAPI contactAPI;
     private String userName;
-
+    private String server;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,8 +51,10 @@ public class ChatListActivity extends AppCompatActivity {
 
         if (activityIntent != null) {
             userName = activityIntent.getStringExtra("Username");
+            server=activityIntent.getStringExtra("Server");
         } else {
             userName = "";
+            server="";
         }
         db = Room.databaseBuilder(getApplicationContext(),
                 AppDB.class, "ContactsDB").allowMainThreadQueries().build();
@@ -87,7 +89,15 @@ public class ChatListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        FloatingActionButton fab_setting = findViewById(R.id.btnSetting);
+        fab_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+                intent.putExtra("username", userName);
+                startActivity(intent);
+            }
+        });
 
         listView.setAdapter(adapter);
         listView.setClickable(true);

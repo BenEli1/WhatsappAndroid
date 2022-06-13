@@ -6,4 +6,5 @@
     <item name="RegisterButton" type="id" />
     <item name="user_image_profile_image" type="id" />
     <item name="user_text_user_name" type="id" />
+    <item name="back_button_setting" type="id" />
 </resources>
