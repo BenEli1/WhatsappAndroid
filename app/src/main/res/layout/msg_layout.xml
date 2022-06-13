@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textColorHint="#CFD8DC"
-        android:textColor="#CFD8DC"
+        android:textColor="@color/black"
         android:hint="Write a message" />
 
     <ImageView
