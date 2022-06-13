@@ -1,8 +1,11 @@
 package com.example.whatsappandroid;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Base64;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -45,6 +48,14 @@ public class SingleChatActivity extends AppCompatActivity {
     private RecyclerView mMessageRecycler;
     private CustomMsgAdapter mMessageAdapter;
     private String contactServer;
+    private AppUserImageDB userImageDB;
+    private UserImageDao userImageDao;
+    private List<UserImage> userImages;
+
+    private Bitmap convertBase64ToBitmap(String b64) {
+        byte[] imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -64,6 +75,20 @@ public class SingleChatActivity extends AppCompatActivity {
             profilePictureView = findViewById(R.id.user_image_profile_image);
             //profilePictureView.setImageResource(profilePicture);
 
+        }
+
+        userImageDB = Room.databaseBuilder(getApplicationContext(),
+                AppUserImageDB.class, "UserImagesDB").allowMainThreadQueries().build();
+        userImageDao = userImageDB.userImageDao();
+        userImages = new ArrayList<>();
+        userImages.addAll(userImageDao.index());
+
+        ImageView image = findViewById(R.id.current_img);
+
+        for(UserImage userImage : userImages){
+            if(userImage.getUsername().equals(ContactUserName)){
+                image.setImageBitmap(convertBase64ToBitmap(userImage.getImage()));
+            }
         }
 
         TextView viewContact = findViewById(R.id.current_user);

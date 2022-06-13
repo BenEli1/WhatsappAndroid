@@ -14,12 +14,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
-
 import com.example.whatsappandroid.api.UserAPI;
-
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -29,6 +26,9 @@ import java.util.List;
 public class RegisterActivity extends AppCompatActivity {
 
     private AppUserDB db;
+    private AppUserImageDB userImageDB;
+    private UserImageDao userImageDao;
+    private List<UserImage> userImages;
     private UserDao UserDao;
     private List<User> users;
     private UserAPI userAPI;
@@ -39,7 +39,6 @@ public class RegisterActivity extends AppCompatActivity {
     private Button BSelectImage;
     private ImageView IVPreviewImage;
     private String encodedImage;
-    private String encodedString;
     private final int SELECT_PICTURE = 200;
 
 
@@ -59,39 +58,6 @@ public class RegisterActivity extends AppCompatActivity {
         // pass the constant to compare it
         // with the returned requestCode
         startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
-    }
-
-    String encodeImage(Bitmap bitmap) {
-
-        BitmapFactory.Options options = null;
-        options = new BitmapFactory.Options();
-        options.inSampleSize = 3;
-
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        // Must compress the Image to reduce image size to make upload
-        // easy
-        try {
-
-            bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream);
-        } catch (Exception e1) {
-            // TODO Auto-generated catch block
-
-        }
-
-        //System.out.println("SIZE OF BITMAP " + bitmap));
-
-        byte[] byte_arr = stream.toByteArray();
-        // Encode Image to String
-
-        try {
-            encodedString = Base64.encodeToString(byte_arr, 0);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-        }
-
-
-        return encodedString;
-
     }
 
     public String BitMapToString(Bitmap bitmap) {
@@ -197,6 +163,10 @@ public class RegisterActivity extends AppCompatActivity {
                 AppUserDB.class, "UsersDB").allowMainThreadQueries().build();
         UserDao = db.userDao();
         users = new ArrayList<User>();
+        userImageDB = Room.databaseBuilder(getApplicationContext(),
+                AppUserImageDB.class, "UserImagesDB").allowMainThreadQueries().build();
+        userImageDao = userImageDB.userImageDao();
+        userImages = new ArrayList<UserImage>();
         userAPI = new UserAPI(users, UserDao);
         Button btnBack = findViewById(R.id.BackButton);
         btnBack.setOnClickListener(arg0 -> finish());
@@ -254,10 +224,11 @@ public class RegisterActivity extends AppCompatActivity {
                 return;
             }
 
-            User newUser = new User(username, nickName, password, "");
+            User newUser = new User(username, nickName, password, encodedImage);
             UserDao.insert(newUser);
             userAPI.post(newUser);
-
+            UserImage userImage = new UserImage(username, encodedImage);
+            userImageDao.insert(userImage);
             Intent i = new Intent(this, ChatListActivity.class);
             i.putExtra("Username", username);
             i.putExtra("password",password);

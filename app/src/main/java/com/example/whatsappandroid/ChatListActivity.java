@@ -21,19 +21,6 @@ public class ChatListActivity extends AppCompatActivity {
             R.drawable.blue, R.drawable.gold, R.drawable.green,
             R.drawable.red, R.drawable.lightblue, R.drawable.custom_button
     };
-//    final private String[] userNames = {
-//            "Blue User", "Golden User", "Green User", "Red User", "Lightblue User", "Gray User"
-//    };
-//
-//    final private String[] lastMassages = {
-//            "Hi, how are you?", "24K Magic", "I'm GREEN!", "Red is my name", "wasap :)", "Yo!"
-//    };
-//
-//    final private String[] times = {
-//            "12:00", "00:30", "3:23", "8:59", "14:52", "12:23"
-//    };
-
-
     private ListView listView;
     private CustomListAdapter adapter;
     private AppDB db;
@@ -42,6 +29,10 @@ public class ChatListActivity extends AppCompatActivity {
     private ContactAPI contactAPI;
     private String userName;
     private String server;
+    private AppUserImageDB userImageDB;
+    private UserImageDao userImageDao;
+    private List<UserImage> userImages;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,9 +52,14 @@ public class ChatListActivity extends AppCompatActivity {
         contactDao = db.contactDao();
         //contacts = contactDao.index();
         contactAPI = new ContactAPI(contacts, contactDao, userName);
+        userImageDB = Room.databaseBuilder(getApplicationContext(),
+                AppUserImageDB.class, "UserImagesDB").allowMainThreadQueries().build();
+        userImageDao = userImageDB.userImageDao();
+        userImages = new ArrayList<>();
+        userImages.addAll(userImageDao.index());
         contactAPI.get();
         listView = findViewById(R.id.list_view);
-        adapter = new CustomListAdapter(getApplicationContext(), contacts);
+        adapter = new CustomListAdapter(getApplicationContext(), contacts, userImages);
         FloatingActionButton fab = findViewById(R.id.btnAdd);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
