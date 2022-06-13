@@ -10,11 +10,12 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import com.example.whatsappandroid.api.ContactAPI;
 import com.example.whatsappandroid.api.MessageAPI;
-import com.example.whatsappandroid.api.TransferAPI;
 import com.example.whatsappandroid.api.UserAPI;
 
 import java.time.LocalDateTime;
@@ -24,6 +25,7 @@ import java.util.Date;
 import java.util.List;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+
 public class SingleChatActivity extends AppCompatActivity {
 
     ImageView profilePictureView;
@@ -39,6 +41,8 @@ public class SingleChatActivity extends AppCompatActivity {
     private MessageAPI messageAPI;
     private CustomMsgAdapter adapter;
     private ListView listView;
+    private RecyclerView mMessageRecycler;
+    private CustomMsgAdapter mMessageAdapter;
     private String contactServer;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -53,7 +57,6 @@ public class SingleChatActivity extends AppCompatActivity {
         if (activityIntent != null) {
             ContactUserName = activityIntent.getStringExtra("ContactUserName");
             ContactNickName = activityIntent.getStringExtra("ContactNickName");
-            contactServer = activityIntent.getStringExtra("server");
             UserName = activityIntent.getStringExtra("Username");
             int profilePicture = activityIntent.getIntExtra("profilePicture", R.drawable.blue);
             profilePictureView = findViewById(R.id.user_image_profile_image);
@@ -80,53 +83,28 @@ public class SingleChatActivity extends AppCompatActivity {
         messages.addAll(messageDao.index(UserName, ContactUserName));
         adapter = new CustomMsgAdapter(getApplicationContext(), messages);
 
-        listView = findViewById(R.id.msg_view);
-        listView.setAdapter(adapter);
+        mMessageRecycler = (RecyclerView) findViewById(R.id.msg_view);
+        mMessageRecycler.setLayoutManager(new LinearLayoutManager(this));
+        mMessageRecycler.setAdapter(mMessageAdapter);
+        mMessageRecycler.setAdapter(adapter);
 
         ImageView sendMessage = findViewById(R.id.send_button);
         sendMessage.setOnClickListener(view -> {
-
-            //the message
             EditText text = findViewById(R.id.Edit_Text_Msg_Send);
             String messageText = text.getText().toString();
-
-            //check that the message is not empty
-            if(messageText.equals("")){
-                return;
-            }
-
-            //clear the message
-            text.setText("");
-
-            //generate date
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
             LocalDateTime now = LocalDateTime.now();
-
-            //create the new message
             Message newMessage = new Message(this.ContactUserName, this.UserName, messageText, now.toString(), "true");
-
-            //send the new message
             messageDao.insert(newMessage);
             messageAPI.post(newMessage);
-
-            //change the contact
             Contact contact = contactDao.get(ContactUserName, UserName);
             contact.setLastdate(now.toString());
             contact.setLast(messageText);
             contactDao.update(contact);
-
-            //display the new message
             messages.clear();
             messages.addAll(messageDao.index(UserName, ContactUserName));
-            listView.setAdapter(adapter);
+            mMessageRecycler.setAdapter(adapter);
             adapter.notifyDataSetChanged();
-
-            //send the transfer
-            List<transfer> transfers = new ArrayList<transfer>();
-            //here the server is the contact server
-            TransferAPI transferAPI = new TransferAPI(transfers, contactServer);
-            transfer transfer = new transfer(UserName, ContactUserName, messageText);
-            transferAPI.post(transfer);
         });
     }
 }
