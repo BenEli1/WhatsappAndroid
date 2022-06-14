@@ -17,7 +17,25 @@
         app:layout_constraintTop_toTopOf="parent"
         android:padding="50dp">
 
+        <TextView
+            android:id="@+id/changed_server"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:minHeight="48dp"
+            android:text="" />
 
+        <EditText
+            android:id="@+id/editTextServerSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_marginBottom="10dp"
+            android:hint="@string/server"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:importantForAutofill="no"/>
 
         <Button
             android:id="@+id/save_setting_changes"

@@ -20,6 +20,7 @@ import androidx.room.Room;
 import com.example.whatsappandroid.AppDB;
 import com.example.whatsappandroid.AppMessageDB;
 import com.example.whatsappandroid.AppUserImageDB;
+import com.example.whatsappandroid.CreatedClasses.BaseUrl;
 import com.example.whatsappandroid.CreatedClasses.Contact;
 import com.example.whatsappandroid.Dao.ContactDao;
 import com.example.whatsappandroid.Adapter.CustomMsgAdapter;
