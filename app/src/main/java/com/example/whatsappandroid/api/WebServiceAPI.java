@@ -4,6 +4,7 @@ import com.example.whatsappandroid.CreatedClasses.Contact;
 import com.example.whatsappandroid.CreatedClasses.Invitation;
 import com.example.whatsappandroid.CreatedClasses.Message;
 import com.example.whatsappandroid.CreatedClasses.User;
+import com.example.whatsappandroid.CreatedClasses.UserToken;
 import com.example.whatsappandroid.transfer;
 
 import java.util.List;
@@ -46,4 +47,7 @@ public interface WebServiceAPI {
 
     @POST("api/invitations")
     Call<Void> postInvitation(@Body Invitation invitation);
+
+    @POST("api/UserTokens")
+    Call<Void> postUserToken(@Body UserToken userToken);
 }

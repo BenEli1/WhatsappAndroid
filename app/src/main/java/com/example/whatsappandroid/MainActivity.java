@@ -1,4 +1,4 @@
-package com.example.whatsappandroid.Activities;
+package com.example.whatsappandroid;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -10,8 +10,8 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
-import com.example.whatsappandroid.AppUserDB;
-import com.example.whatsappandroid.R;
+import com.example.whatsappandroid.Activities.ChatListActivity;
+import com.example.whatsappandroid.Activities.RegisterActivity;
 import com.example.whatsappandroid.CreatedClasses.User;
 import com.example.whatsappandroid.api.UserAPI;
 
