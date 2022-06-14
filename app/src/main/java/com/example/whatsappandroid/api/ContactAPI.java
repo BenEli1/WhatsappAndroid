@@ -1,5 +1,6 @@
 package com.example.whatsappandroid.api;
 
+import com.example.whatsappandroid.CreatedClasses.BaseUrl;
 import com.example.whatsappandroid.CreatedClasses.Contact;
 import com.example.whatsappandroid.Dao.ContactDao;
 import com.example.whatsappandroid.MyApplication;
@@ -25,7 +26,7 @@ public class ContactAPI {
         this.Username=username;
 
         retrofit = new Retrofit.Builder()
-                .baseUrl(MyApplication.context.getString(R.string.BaseUrl))
+                .baseUrl(BaseUrl.baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
