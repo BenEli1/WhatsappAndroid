@@ -19,6 +19,7 @@ import com.example.whatsappandroid.CreatedClasses.UserImage;
 import com.example.whatsappandroid.Dao.UserImageDao;
 import com.example.whatsappandroid.api.ContactAPI;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,7 @@ public class ChatListActivity extends AppCompatActivity {
     private AppUserImageDB userImageDB;
     private UserImageDao userImageDao;
     private List<UserImage> userImages;
+    private String newToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +49,21 @@ public class ChatListActivity extends AppCompatActivity {
         contacts = new ArrayList<Contact>();
         Intent activityIntent = getIntent();
 
+        //
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(ChatListActivity.this, instanceIdResult -> {
+            newToken = instanceIdResult.getToken();
+        });
+
+
+        //
+
+
         if (activityIntent != null) {
             userName = activityIntent.getStringExtra("Username");
-            server=activityIntent.getStringExtra("Server");
+            server = activityIntent.getStringExtra("Server");
         } else {
             userName = "";
-            server="";
+            server = "";
         }
         db = Room.databaseBuilder(getApplicationContext(),
                 AppDB.class, "ContactsDB").allowMainThreadQueries().build();
