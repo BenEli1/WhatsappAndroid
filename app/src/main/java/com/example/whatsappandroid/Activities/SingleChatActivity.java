@@ -1,4 +1,4 @@
-package com.example.whatsappandroid;
+package com.example.whatsappandroid.Activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,18 +17,25 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
-import com.example.whatsappandroid.api.ContactAPI;
+import com.example.whatsappandroid.AppDB;
+import com.example.whatsappandroid.AppMessageDB;
+import com.example.whatsappandroid.AppUserImageDB;
+import com.example.whatsappandroid.CreatedClasses.Contact;
+import com.example.whatsappandroid.Dao.ContactDao;
+import com.example.whatsappandroid.Adapter.CustomMsgAdapter;
+import com.example.whatsappandroid.CreatedClasses.Message;
+import com.example.whatsappandroid.Dao.MessageDao;
+import com.example.whatsappandroid.R;
+import com.example.whatsappandroid.CreatedClasses.UserImage;
+import com.example.whatsappandroid.Dao.UserImageDao;
 import com.example.whatsappandroid.api.MessageAPI;
 import com.example.whatsappandroid.api.TransferAPI;
-import com.example.whatsappandroid.api.UserAPI;
+import com.example.whatsappandroid.transfer;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
 
 public class SingleChatActivity extends AppCompatActivity {
 

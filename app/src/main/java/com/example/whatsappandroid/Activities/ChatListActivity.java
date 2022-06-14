@@ -1,6 +1,5 @@
-package com.example.whatsappandroid;
+package com.example.whatsappandroid.Activities;
 
-import android.content.AsyncQueryHandler;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +9,14 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import com.example.whatsappandroid.AppDB;
+import com.example.whatsappandroid.AppUserImageDB;
+import com.example.whatsappandroid.CreatedClasses.Contact;
+import com.example.whatsappandroid.Dao.ContactDao;
+import com.example.whatsappandroid.Adapter.CustomListAdapter;
+import com.example.whatsappandroid.R;
+import com.example.whatsappandroid.CreatedClasses.UserImage;
+import com.example.whatsappandroid.Dao.UserImageDao;
 import com.example.whatsappandroid.api.ContactAPI;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 

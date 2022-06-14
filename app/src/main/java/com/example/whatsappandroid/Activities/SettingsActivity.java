@@ -1,11 +1,12 @@
-package com.example.whatsappandroid;
+package com.example.whatsappandroid.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.whatsappandroid.R;
 
 public class SettingsActivity extends AppCompatActivity {
 private String username;

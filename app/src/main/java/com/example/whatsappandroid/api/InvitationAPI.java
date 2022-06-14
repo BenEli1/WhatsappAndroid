@@ -1,6 +1,6 @@
 package com.example.whatsappandroid.api;
-import com.example.whatsappandroid.Invitation;
-import com.example.whatsappandroid.transfer;
+import com.example.whatsappandroid.CreatedClasses.Invitation;
+
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;

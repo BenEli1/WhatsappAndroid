@@ -1,4 +1,4 @@
-package com.example.whatsappandroid;
+package com.example.whatsappandroid.CreatedClasses;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
@@ -11,7 +11,7 @@ public class UserImage {
     private String Username;
     private String Image;
 
-    UserImage(){
+    public UserImage(){
 
     }
 

@@ -1,4 +1,4 @@
-package com.example.whatsappandroid;
+package com.example.whatsappandroid.Adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -13,9 +13,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.room.Room;
 
-import java.util.ArrayList;
+import com.example.whatsappandroid.CreatedClasses.Contact;
+import com.example.whatsappandroid.CreatedClasses.UserImage;
+import com.example.whatsappandroid.R;
+
 import java.util.List;
 
 public class CustomListAdapter extends ArrayAdapter<Contact> {

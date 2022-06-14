@@ -1,4 +1,4 @@
-package com.example.whatsappandroid;
+package com.example.whatsappandroid.CreatedClasses;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
@@ -12,14 +12,14 @@ public class User {
     private String Password;
     private String Image;
 
-    User(String userName, String nickName, String password, String image) {
+    public User(String userName, String nickName, String password, String image) {
         UserName = userName;
         NickName = nickName;
         Password = password;
         Image = image;
     }
 
-    User(){
+    public User(){
 
     }
 

@@ -1,4 +1,4 @@
-package com.example.whatsappandroid;
+package com.example.whatsappandroid.Activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -16,6 +16,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
+
+import com.example.whatsappandroid.AppUserDB;
+import com.example.whatsappandroid.AppUserImageDB;
+import com.example.whatsappandroid.R;
+import com.example.whatsappandroid.CreatedClasses.User;
+import com.example.whatsappandroid.CreatedClasses.UserImage;
+import com.example.whatsappandroid.Dao.UserImageDao;
 import com.example.whatsappandroid.api.UserAPI;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -29,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
     private AppUserImageDB userImageDB;
     private UserImageDao userImageDao;
     private List<UserImage> userImages;
-    private UserDao UserDao;
+    private com.example.whatsappandroid.Dao.UserDao UserDao;
     private List<User> users;
     private UserAPI userAPI;
     private EditText editTextUsername;

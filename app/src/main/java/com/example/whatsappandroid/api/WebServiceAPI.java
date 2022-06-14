@@ -1,9 +1,9 @@
 package com.example.whatsappandroid.api;
 
-import com.example.whatsappandroid.Contact;
-import com.example.whatsappandroid.Invitation;
-import com.example.whatsappandroid.Message;
-import com.example.whatsappandroid.User;
+import com.example.whatsappandroid.CreatedClasses.Contact;
+import com.example.whatsappandroid.CreatedClasses.Invitation;
+import com.example.whatsappandroid.CreatedClasses.Message;
+import com.example.whatsappandroid.CreatedClasses.User;
 import com.example.whatsappandroid.transfer;
 
 import java.util.List;

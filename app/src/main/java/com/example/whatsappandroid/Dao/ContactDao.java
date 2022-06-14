@@ -1,10 +1,12 @@
-package com.example.whatsappandroid;
+package com.example.whatsappandroid.Dao;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
+
+import com.example.whatsappandroid.CreatedClasses.Contact;
 
 import java.util.List;
 

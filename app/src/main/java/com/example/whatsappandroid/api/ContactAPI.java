@@ -1,7 +1,7 @@
 package com.example.whatsappandroid.api;
 
-import com.example.whatsappandroid.Contact;
-import com.example.whatsappandroid.ContactDao;
+import com.example.whatsappandroid.CreatedClasses.Contact;
+import com.example.whatsappandroid.Dao.ContactDao;
 import com.example.whatsappandroid.MyApplication;
 import com.example.whatsappandroid.R;
 
