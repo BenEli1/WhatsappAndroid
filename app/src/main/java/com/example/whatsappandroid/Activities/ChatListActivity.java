@@ -52,12 +52,13 @@ public class ChatListActivity extends AppCompatActivity {
         contacts = new ArrayList<Contact>();
         Intent activityIntent = getIntent();
 
-        //
+        /*
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(ChatListActivity.this, instanceIdResult -> {
             newToken = instanceIdResult.getToken();
         });
-        //
+        */
 
+        newToken = FirebaseInstanceId.getInstance().getToken();
 
         if (activityIntent != null) {
             userName = activityIntent.getStringExtra("Username");

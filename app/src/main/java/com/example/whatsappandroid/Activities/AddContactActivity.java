@@ -28,6 +28,7 @@ public class AddContactActivity extends AppCompatActivity {
     private EditText etUsername;
     private EditText etNickname;
     private EditText etServer;
+    private String userName;
 
     private void cleatAllFields(){
         etUsername.setText("");
@@ -67,7 +68,6 @@ public class AddContactActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_contact);
 
         Intent activityIntent = getIntent();
-        String userName;
         if (activityIntent != null) {
             userName = activityIntent.getStringExtra("username");
         } else {
@@ -130,6 +130,7 @@ public class AddContactActivity extends AppCompatActivity {
             //here the server is my server!!
             Invitation invitation = new Invitation(userName,usernameText, MyApplication.context.getString(R.string.BaseUrl));
             invitationAPI.post(invitation);
+
             finish();
         });
     }

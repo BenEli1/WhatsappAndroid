@@ -7,13 +7,31 @@ import android.os.Build;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.room.Room;
 
+import com.example.whatsappandroid.CreatedClasses.Invitation;
+import com.example.whatsappandroid.CreatedClasses.Message;
+import com.example.whatsappandroid.Dao.ContactDao;
+import com.example.whatsappandroid.Dao.MessageDao;
+import com.example.whatsappandroid.api.ContactAPI;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 public class MyService extends FirebaseMessagingService {
-    public MyService() {
 
+    private AppDB contactDb;
+    private AppMessageDB messageDb;
+    private ContactDao contactDao;
+    private MessageDao messageDao;
+
+    public MyService() {
+        contactDb = Room.databaseBuilder(getApplicationContext(),
+                AppDB.class, "ContactsDB").allowMainThreadQueries().build();
+        contactDao = contactDb.contactDao();
+
+        messageDb = Room.databaseBuilder(getApplicationContext(),
+                AppMessageDB.class, "MessageDB").allowMainThreadQueries().build();
+        messageDao = messageDb.messageDao();
     }
 
     @Override
@@ -27,8 +45,6 @@ public class MyService extends FirebaseMessagingService {
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT);
             NotificationManagerCompat notificationManagerCompat=NotificationManagerCompat.from(this);
             notificationManagerCompat.notify(1,builder.build());
-
-
         }
     }
 
