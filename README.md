@@ -1,5 +1,5 @@
 # WhatsappAndroid
-
+In order to check the android project - you need to connect to firebase + use the SaharBranch in the serverside project!!!!!!
 # Activities : 
 MainActivity - Login Page
 
