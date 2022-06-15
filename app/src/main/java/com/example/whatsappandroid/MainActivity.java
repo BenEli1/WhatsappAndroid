@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             for(User user : users){
-                if(user.getUserUserName().equals(username)  && user.getPassword().equals(password)){
+                if(user.getUserName()!=null && user.getUserUserName().equals(username)  && user.getPassword().equals(password)){
                     i.putExtra("Username", username);
                     startActivity(i);
                     return;

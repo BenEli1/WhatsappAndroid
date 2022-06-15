@@ -61,7 +61,7 @@ public class CustomListAdapter extends ArrayAdapter<Contact> {
         boolean imageNotFount = true;
 
         for(UserImage userImage : userImages){
-            if(userImage.getUsername().equals(contact.getId())) {
+            if(userImage.getUsername().equals(contact.getId()) && userImage.getImage()!=null) {
                 bitmap = convertBase64ToBitmap(userImage.getImage());
                 imageView.setImageBitmap(bitmap);
                 imageNotFount = false;

@@ -139,7 +139,7 @@ public class SingleChatActivity extends AppCompatActivity {
             text.setText("");
 
             //generate date
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd HH:mm");
             LocalDateTime now = LocalDateTime.now();
 
             //create the new message
