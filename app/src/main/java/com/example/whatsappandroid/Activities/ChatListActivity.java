@@ -15,6 +15,7 @@ import com.example.whatsappandroid.CreatedClasses.Contact;
 import com.example.whatsappandroid.CreatedClasses.UserToken;
 import com.example.whatsappandroid.Dao.ContactDao;
 import com.example.whatsappandroid.Adapter.CustomListAdapter;
+import com.example.whatsappandroid.MainActivity;
 import com.example.whatsappandroid.R;
 import com.example.whatsappandroid.CreatedClasses.UserImage;
 import com.example.whatsappandroid.Dao.UserImageDao;
@@ -52,13 +53,15 @@ public class ChatListActivity extends AppCompatActivity {
         contacts = new ArrayList<Contact>();
         Intent activityIntent = getIntent();
 
-        /*
+
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(ChatListActivity.this, instanceIdResult -> {
             newToken = instanceIdResult.getToken();
+            userTokenAPI = new UserTokenAPI();
+            UserToken userToken = new UserToken(userName, newToken);
+            userTokenAPI.post(userToken);
         });
-        */
 
-        newToken = FirebaseInstanceId.getInstance().getToken();
+        //newToken = FirebaseInstanceId.getInstance().getToken();
 
         if (activityIntent != null) {
             userName = activityIntent.getStringExtra("Username");
@@ -67,10 +70,6 @@ public class ChatListActivity extends AppCompatActivity {
             userName = "";
             server = "";
         }
-
-        userTokenAPI = new UserTokenAPI();
-        UserToken userToken = new UserToken(userName, newToken);
-        userTokenAPI.post(userToken);
 
         db = Room.databaseBuilder(getApplicationContext(),
                 AppDB.class, "ContactsDB").allowMainThreadQueries().build();

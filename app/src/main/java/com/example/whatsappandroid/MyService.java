@@ -25,6 +25,7 @@ public class MyService extends FirebaseMessagingService {
     private MessageDao messageDao;
 
     public MyService() {
+
         contactDb = Room.databaseBuilder(getApplicationContext(),
                 AppDB.class, "ContactsDB").allowMainThreadQueries().build();
         contactDao = contactDb.contactDao();
@@ -35,24 +36,29 @@ public class MyService extends FirebaseMessagingService {
     }
 
     @Override
-    public void onMessageReceived(@NonNull RemoteMessage message) {
-        if(message.getNotification()!=null){
+    public void onMessageReceived(RemoteMessage remoteMessage) {
+        if(remoteMessage.getNotification() != null){
             createNotificationChannel();
-            NotificationCompat.Builder builder=new NotificationCompat.Builder(this,"1")
-                    .setSmallIcon(R.drawable.ic_launcher_foreground)
-                    .setContentTitle(message.getNotification().getTitle())
-                    .setContentText(message.getNotification().getBody())
+
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"1")
+                    .setSmallIcon(R.drawable.ic_launcher_background)
+                    .setContentTitle(remoteMessage.getNotification().getTitle())
+                    .setContentText(remoteMessage.getNotification().getBody())
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-            NotificationManagerCompat notificationManagerCompat=NotificationManagerCompat.from(this);
-            notificationManagerCompat.notify(1,builder.build());
+
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+            notificationManager.notify(1,builder.build());
         }
     }
 
     private void createNotificationChannel(){
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             int importance= NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel= new NotificationChannel("1","My channel",importance);
-            NotificationManager notificationManager=getSystemService(NotificationManager.class);
+            CharSequence name = "Channel 1";
+            String description = "Main Channel";
+            NotificationChannel channel= new NotificationChannel("1",name,importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
     }
