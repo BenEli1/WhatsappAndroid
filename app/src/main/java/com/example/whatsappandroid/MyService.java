@@ -5,17 +5,25 @@ import android.app.NotificationManager;
 import android.os.Build;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.room.Room;
 
+import com.example.whatsappandroid.CreatedClasses.BaseUrl;
+import com.example.whatsappandroid.CreatedClasses.Contact;
 import com.example.whatsappandroid.CreatedClasses.Invitation;
 import com.example.whatsappandroid.CreatedClasses.Message;
 import com.example.whatsappandroid.Dao.ContactDao;
 import com.example.whatsappandroid.Dao.MessageDao;
 import com.example.whatsappandroid.api.ContactAPI;
+import com.example.whatsappandroid.api.MessageAPI;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class MyService extends FirebaseMessagingService {
 
@@ -23,18 +31,24 @@ public class MyService extends FirebaseMessagingService {
     private AppMessageDB messageDb;
     private ContactDao contactDao;
     private MessageDao messageDao;
+    private ContactAPI contactAPI;
+    private MessageAPI messageAPI;
+    private List<Message> messages;
+    private List<Contact> contacts;
 
     public MyService() {
 
         contactDb = Room.databaseBuilder(getApplicationContext(),
                 AppDB.class, "ContactsDB").allowMainThreadQueries().build();
         contactDao = contactDb.contactDao();
-
+        ContactAPI contactAPI;
         messageDb = Room.databaseBuilder(getApplicationContext(),
                 AppMessageDB.class, "MessageDB").allowMainThreadQueries().build();
         messageDao = messageDb.messageDao();
+
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         if(remoteMessage.getNotification() != null){
@@ -48,6 +62,27 @@ public class MyService extends FirebaseMessagingService {
 
             NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
             notificationManager.notify(1,builder.build());
+
+            if(remoteMessage.getNotification().getTitle().equals("Invitation")){
+                String s = remoteMessage.getNotification().getBody();
+                String[] str = s.split("|");
+                String contactName = str[0];
+                String username = str[1];
+
+                Contact contact = new Contact(contactName, 0, "", contactName, BaseUrl.baseUrl, "", username);
+                contactDao.insert(contact);
+            }
+
+            String s = remoteMessage.getNotification().getTitle();
+            String[] str = s.split("|");
+            String contactName = str[0];
+            String username = str[1];
+
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+
+            Message message = new Message(contactName, username, remoteMessage.getNotification().getBody(), now.toString(), "false");
+            messageDao.insert(message);
         }
     }
 
