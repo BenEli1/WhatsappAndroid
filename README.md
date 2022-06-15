@@ -1,5 +1,7 @@
 # WhatsappAndroid
 In order to check the android project - you need to connect to firebase + use the SaharBranch in the serverside project!!!!!!
+
+there are validations on all register fields, and must insert a picture!
 # Activities : 
 MainActivity - Login Page
 
@@ -11,6 +13,8 @@ RegisterActivity - Register Page
 
 
 ChatListActivity - Chat List Page
+
+![image](https://user-images.githubusercontent.com/92650578/173938925-c59674e0-c2be-4f19-8df9-a0bad497ea52.png)
 
 AddContactActivity - Add a contact Page
 
@@ -26,5 +30,11 @@ SettingActivity - Change Your Server Url
 
 SingleChatActivity - click on a chat and get the indvidual chat with that person
 
+![image](https://user-images.githubusercontent.com/92650578/173939002-bf64fadb-83ef-42d8-8316-c5e67464f7b8.png)
 
+
+
+a short demonstration of the use of notifications and adding a contact to a certain user and sending messages between people:
+
+https://user-images.githubusercontent.com/92650578/173938612-492c9af3-f6be-40c6-94a6-4f50df9bb1ae.mp4
 
