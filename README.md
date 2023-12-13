@@ -1,7 +1,7 @@
 # WhatsappAndroid
-In order to check the android project - you need to connect to firebase + use the SaharBranch in the serverside project!!!!!!
+In order to check the android project - you need to connect to firebase + use the SaharBranch in the serverside project
 
-there are validations on all register fields, and must insert a picture!
+There are validations on all register fields, and a picture is needed.
 # Activities : 
 MainActivity - Login Page
 
